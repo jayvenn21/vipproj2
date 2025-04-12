@@ -25,11 +25,11 @@ Replace "username@host" with what you use to log on to your HPC cluster
 Seeing as only two specific students of our university should be reading this nonfinal version of the README, and it was there already for me, you should probably be fine already
 3. Make a secret.py file.
 Include the following 5 variables:
-HPC_USER = your username, whatever is before the @ in what you use to login
-HPC_HOST = the host of the HPC, whatever is after the @ in what you use to login
-REMOTE_INPUT_FILE = The absolute path to your desired prompt.txt location in your HPC
-REMOTE_OUTPUT_FILE = The absolute path to your desired prompt.txt location in your HPC
-HPC_JOB_SCRIPT = The path to your desired jobscript.sh location. Does not have to be the absolute path
+- HPC_USER = your username, whatever is before the @ in what you use to login
+- HPC_HOST = the host of the HPC, whatever is after the @ in what you use to login
+- REMOTE_INPUT_FILE = The absolute path to your desired prompt.txt location in your HPC
+- REMOTE_OUTPUT_FILE = The absolute path to your desired prompt.txt location in your HPC
+- HPC_JOB_SCRIPT = The path to your desired jobscript.sh location. Does not have to be the absolute path
 To get the absolute filepath you can use pwd or realpath
 NOTE: Put secret.py in the .gitignore
 4. Clone the repository in the HPC
