@@ -24,6 +24,9 @@ def run_task():
     try:
          # Step 1: Transfer prompt to HPC
         with open(LOCAL_INPUT_FILE, "w") as f1:
+            if task == "Translate":
+                f1.write(source_lang_var.get() + "\n")
+                f1.write(target_lang_var.get() + "\n")
             f1.write(input_text)
         
         subprocess.run(["scp", LOCAL_INPUT_FILE, f"{HPC_USER}@{HPC_HOST}:{REMOTE_INPUT_FILE}"])
@@ -47,15 +50,7 @@ def run_task():
 
         # Poll for result
 
-        """
-        TO DO:
 
-        1. Write task in first line
-        2. If translating, write to and from in second and third line
-        3. The rest serves as the prompt
-        4. Write the output in a file result.txt and scp it back to local environment
-        5. Read contents of the file and display it on result box
-        """
         while True:
             time.sleep(1)
             result = subprocess.run(
