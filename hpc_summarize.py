@@ -1,4 +1,8 @@
 from transformers import T5ForConditionalGeneration, T5Tokenizer
+import secret
+
+REMOTE_INPUT_FILE = secret.REMOTE_INPUT_FILE
+REMOTE_OUTPUT_FILE = secret.REMOTE_OUTPUT_FILE
 
 model_name = "t5-base"
 model = T5ForConditionalGeneration.from_pretrained(model_name)
@@ -10,11 +14,11 @@ def summarize_text(input_text):
     summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
     return summary
 
-with open("prompt.txt", "r") as p:
+with open(REMOTE_INPUT_FILE, "r") as p:
     prompt_text = p.read()
 
 p.close()
 result = summarize_text(prompt_text)
-with open("result.txt", "w") as r:
+with open(REMOTE_OUTPUT_FILE, "w") as r:
     r.write(result)
 r.close()

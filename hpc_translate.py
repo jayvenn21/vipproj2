@@ -1,4 +1,8 @@
 from transformers import MarianMTModel, MarianTokenizer
+import secret
+
+REMOTE_INPUT_FILE = secret.REMOTE_INPUT_FILE
+REMOTE_OUTPUT_FILE = secret.REMOTE_OUTPUT_FILE
 
 # Function to get the model name based on the source and target language
 def get_model_name(source_language, target_language):
@@ -23,13 +27,13 @@ def translate_text(input_text, source_language='en', target_language='es'):
     
     return translation
 
-with open("prompt.txt", "r") as p:
+with open(REMOTE_INPUT_FILE, "r") as p:
     prompt = p.readlines()
 
 prompt = [line.strip() for line in prompt]
 prompt_text = "\n".join(prompt[2:])
 p.close()
 result = translate_text(prompt_text, prompt[0], prompt[1])
-with open("result.txt", "w") as r:
+with open(REMOTE_OUTPUT_FILE, "w") as r:
     r.write(result)
 r.close()
