@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -N1 -n10                         
+#SBATCH -N1 -n1                         
 #SBATCH --mem-per-cpu=16G               
 #SBATCH -t15                             
 #SBATCH -oReport-%j.out   
@@ -14,7 +14,7 @@ case $TASK in
     srun python ~/vipproj2/summarize.py --input "$INPUT_FILE" --output "$OUTPUT_FILE"
     ;;
   ("Translate")
-    srun python ~/vipproj2/translate.py --config "$INPUT_FILE"
+    srun python ~/vipproj2/translate.py --input "$INPUT_FILE" --output "$OUTPUT_FILE"
     ;;
   ("Answer Question")
     srun python ~/vipproj2/qa.py --input "$INPUT_FILE" --output "$OUTPUT_FILE"

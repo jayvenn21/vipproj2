@@ -46,8 +46,18 @@ def run_task():
         #job_id = job_output.strip().split()[-1]  # Optional: parse job ID
 
         # Poll for result
+
+        """
+        TO DO:
+
+        1. Write task in first line
+        2. If translating, write to and from in second and third line
+        3. The rest serves as the prompt
+        4. Write the output in a file result.txt and scp it back to local environment
+        5. Read contents of the file and display it on result box
+        """
         while True:
-            time.sleep(5)
+            time.sleep(1)
             result = subprocess.run(
                 ["ssh", f"{HPC_USER}@{HPC_HOST}", f"test -f {REMOTE_OUTPUT_FILE} && echo DONE || echo WAIT"],
                 stdout=subprocess.PIPE
