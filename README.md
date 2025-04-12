@@ -42,4 +42,4 @@ If you want error logs, add the following line to the start of your jobscript.sh
 More of a note to self, but if you want to remove all your report logs, use "rm Report*" in the directory of your report logs
 
 KNOWN ISSUES:
-"Answer Question" response not displaying properly
+"Answer Question" response not displaying properly when using the HPC version of the program
