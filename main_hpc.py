@@ -9,8 +9,8 @@ import secret
 import time
 
 # === CONFIGURATION ===
-LOCAL_INPUT_FILE = "prompt.json"
-LOCAL_OUTPUT_FILE = "result.json"
+LOCAL_INPUT_FILE = "prompt.txt"
+LOCAL_OUTPUT_FILE = "result.txt"
 HPC_USER = secret.HPC_USER
 HPC_HOST = secret.HPC_HOST
 REMOTE_INPUT_FILE = secret.REMOTE_INPUT_FILE
