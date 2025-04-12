@@ -22,7 +22,7 @@ SETUP INSTRUCTIONS
 ssh-keygen -t rsa -b 4096 -C "username@host"
 Replace "username@host" with what you use to log on to your HPC cluster
 2. If it's not there, put the public id_rsa in the .ssh folder of your hpc cluster: cd .ssh and use scp
-Seeing as only students of Georgia Tech should be reading this nonfinal version of the README, and it was there already for me, you should probably be fine already
+Seeing as only two specific students of our university should be reading this nonfinal version of the README, and it was there already for me, you should probably be fine already
 3. Make a secret.py file.
 Include the following 5 variables:
 HPC_USER = your username, whatever is before the @ in what you use to login
