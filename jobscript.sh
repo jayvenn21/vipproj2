@@ -11,16 +11,16 @@ OUTPUT_FILE=$3
 echo "Running $TASK..."
 case $TASK in
   ("Summarize")
-    srun python summarize.py --input "$INPUT_FILE" --output "$OUTPUT_FILE"
+    srun python ~/vipproj2/summarize.py --input "$INPUT_FILE" --output "$OUTPUT_FILE"
     ;;
   ("Translate")
-    srun python translate.py --config "$INPUT_FILE"
+    srun python ~/vipproj2/translate.py --config "$INPUT_FILE"
     ;;
   ("Answer Question")
-    srun python qa.py --input "$INPUT_FILE" --output "$OUTPUT_FILE"
+    srun python ~/vipproj2/qa.py --input "$INPUT_FILE" --output "$OUTPUT_FILE"
     ;;
   ("Classify")
-    srun python classify.py --input "$INPUT_FILE" --output "$OUTPUT_FILE"
+    srun python ~/vipproj2/classify.py --input "$INPUT_FILE" --output "$OUTPUT_FILE"
     ;;
   (*)
     echo "Unknown task: $TASK"
