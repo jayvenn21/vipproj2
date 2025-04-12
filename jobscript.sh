@@ -2,7 +2,7 @@
 #SBATCH -N1 -n1                         
 #SBATCH --mem-per-cpu=16G               
 #SBATCH -t15                             
-#SBATCH -oReport-%j.out   
+
 
 TASK=$1
 INPUT_FILE=$2

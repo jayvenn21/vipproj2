@@ -46,11 +46,21 @@ def run_task():
 
         job_output = stdout.decode()
         print("Submitted job:", job_output)
-        #job_id = job_output.strip().split()[-1]  # Optional: parse job ID
+        job_id = job_output.strip().split()[-1]  # Optional: parse job ID
 
-        # Poll for result
+        # Waits for the SLURM job to be done before parsing result - to prevent previous result from showing up
+        while True:
+            # Below line Could be removed, idk
+            time.sleep(1)
+            result = subprocess.run(
+                ["ssh", f"{HPC_USER}@{HPC_HOST}", f"squeue -j {job_id} | wc -l"],
+                stdout=subprocess.PIPE
+            )
+            lines = int(result.stdout.decode().strip())
+            if lines <= 1:
+                break
 
-
+        #Polling result
         while True:
             time.sleep(1)
             result = subprocess.run(
@@ -58,10 +68,11 @@ def run_task():
                 stdout=subprocess.PIPE
             )
             if result.stdout.decode().strip() == "DONE":
+                subprocess.run(["scp", f"{HPC_USER}@{HPC_HOST}:{REMOTE_OUTPUT_FILE}", LOCAL_OUTPUT_FILE], check=True)
                 break
 
         # Download the result file
-        subprocess.run(["scp", f"{HPC_USER}@{HPC_HOST}:{REMOTE_OUTPUT_FILE}", LOCAL_OUTPUT_FILE], check=True)
+        
 
         # Return the result
         resulttext = "test text"
@@ -70,22 +81,7 @@ def run_task():
 
         f1.close()
         f2.close()
-        """
-        if task == "Summarize":
-            result = summarize_text(input_text)
-        elif task == "Translate":
-            source_lang = source_lang_var.get()
-            target_lang = target_lang_var.get()
-            result = translate_text(input_text, source_lang, target_lang)  # Use selected languages
-        elif task == "Answer Question":
-            context = input_text.split("\n")[0]  # First line as context
-            question = input_text.split("\n")[1]  # Second line as question
-            result = answer_question(context, question)
-        elif task == "Classify":
-            result = classify_sentiment(input_text)  # Call the correct function here
-        else:
-            result = "Please select a task"
-        """
+       
         result_text_box.delete("1.0", tk.END)
         result_text_box.insert(tk.END, resulttext)
     except Exception as e:
