@@ -19,8 +19,8 @@ As this program is not published yet and is still in testing, some setup needs t
 
 SETUP INSTRUCTIONS
 1. Generate an id_rsa public/private pair using the following command on your local machine:
-ssh-keygen -t rsa -b 4096 -C "username@host"
-Replace "username@host" with what you use to log on to your HPC cluster
+- ssh-keygen -t rsa -b 4096 -C "username@host"
+- Replace "username@host" with what you use to log on to your HPC cluster
 2. If it's not there, put the public id_rsa in the .ssh folder of your hpc cluster: cd .ssh and use scp. It might be there already, double check just in case
 3. Make a secret.py file.
 Include the following 5 variables:
@@ -29,7 +29,7 @@ Include the following 5 variables:
 - REMOTE_INPUT_FILE = The absolute path to your desired prompt.txt location in your HPC
 - REMOTE_OUTPUT_FILE = The absolute path to your desired prompt.txt location in your HPC
 - HPC_JOB_SCRIPT = The path to your desired jobscript.sh location. Does not have to be the absolute path
-To get the absolute filepath you can use pwd or realpath
+- Note: To get the absolute filepath you can use pwd or realpath
 NOTE: Put secret.py in the .gitignore
 4. Clone the repository in the HPC
 5. scp your secrets file into the HPC
