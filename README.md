@@ -1,26 +1,28 @@
+# AI Model Deployment Toolkit
 AUTHORS: Benjamin Lee and Jayanth Vennamreddy
 
-General Information:
+## Features
+- **Summarization**: Condense long documents
+- **Translation**: 50+ language pairs
+- **Question Answering**: Extract answers from context
+- **Sentiment Analysis**: Detect emotion strength
+
+## General Information
+This toolkit provides four NLP capabilities through a user-friendly GUI:
+- Text summarization
+- Machine translation
+- Question answering
+- Sentiment analysis
 
 
-Milestone 2.1:
-
-
-Milestone 2.2:
-
-
-Milestone 2.3:
-
-
-under construction
-
-dependencies: 
+DEPENDENCIES: 
+Below are the dependencies needed to install in the terminal (we have used VScode) before running the program:
 pip install transformers torch sentencepiece scikit-learn accelerate
 
-how to run:
+RUNNING IN LOCAL TERMINAL:
 python main_gui.py
 
-for each feature:
+FOR EACH FEATURE:
 - Summarize (t5-base): place some text as input
 - Translate (Helsinki-NLP/opus-mt-{source}-{target}): place some text as input and choose source language and target language
 - Answer Question (t5-base): Line 1: context (text that contains the answer), Line 2: the question
