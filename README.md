@@ -1,3 +1,17 @@
+AUTHORS: Benjamin Lee and Jayanth Vennamreddy
+
+General Information:
+
+
+Milestone 2.1:
+
+
+Milestone 2.2:
+
+
+Milestone 2.3:
+
+
 under construction
 
 dependencies: 
