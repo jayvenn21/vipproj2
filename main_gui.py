@@ -5,6 +5,18 @@ from translate import translate_text
 from qa import answer_question
 from classify import classify_sentiment
 
+# Language mapping dictionary
+LANGUAGE_MAP = {
+    "en": "English",
+    "es": "Español (Spanish)",
+    "fr": "Français (French)",
+    "de": "Deutsch (German)",
+    "it": "Italiano (Italian)",
+    "pt": "Português (Portuguese)",
+    "ja": "日本語 (Japanese)",
+    "zh": "中文 (Chinese)"
+}
+
 def validate_input(task, input_text):
     """Check if input is valid for the selected task."""
     if not input_text.strip():
@@ -31,8 +43,8 @@ def run_task():
         if task == "Summarize":
             result = summarize_text(input_text)
         elif task == "Translate":
-            source_lang = source_lang_var.get()
-            target_lang = target_lang_var.get()
+            source_lang = source_lang_var.get().split(" ")[0]  # Extract language code
+            target_lang = target_lang_var.get().split(" ")[0]  # Extract language code
             result = translate_text(input_text, source_lang, target_lang)
         elif task == "Answer Question":
             lines = input_text.split("\n")
@@ -63,9 +75,15 @@ def toggle_language_selection(*args):
     if task_var.get() == "Translate":
         language_frame.pack()
         input_label.config(text="Enter Text to Translate:")
+        help_text.set("Enter text and select languages from the dropdown menus.")
     else:
         language_frame.pack_forget()
         input_label.config(text="Enter Input Text:")
+        help_text.set(
+            "Tip: For 'Answer Question', enter context (line 1) and question (line 2)."
+            if task_var.get() == "Answer Question" else
+            "Tip: Enter text and click 'Run Task'."
+        )
 
 # --- GUI Setup ---
 root = tk.Tk()
@@ -91,17 +109,21 @@ help_label.pack()
 
 # Language selection (hidden by default)
 language_frame = tk.Frame(root)
-source_lang_var = tk.StringVar(value="en")
-target_lang_var = tk.StringVar(value="es")
+
+# Create language options with full names
+language_options = [f"{code} - {name}" for code, name in LANGUAGE_MAP.items()]
+
+source_lang_var = tk.StringVar(value=language_options[0])  # Default to English
+target_lang_var = tk.StringVar(value=language_options[1])  # Default to Spanish
 
 source_lang_label = tk.Label(language_frame, text="From:")
 source_lang_label.pack()
-source_lang_menu = tk.OptionMenu(language_frame, source_lang_var, "en", "es", "fr", "de", "it", "pt", "ja", "zh")
+source_lang_menu = tk.OptionMenu(language_frame, source_lang_var, *language_options)
 source_lang_menu.pack()
 
 target_lang_label = tk.Label(language_frame, text="To:")
 target_lang_label.pack()
-target_lang_menu = tk.OptionMenu(language_frame, target_lang_var, "en", "es", "fr", "de", "it", "pt", "ja", "zh")
+target_lang_menu = tk.OptionMenu(language_frame, target_lang_var, *language_options)
 target_lang_menu.pack()
 
 # Run button
@@ -115,13 +137,6 @@ result_text_box = tk.Text(root, height=10, width=50, state="normal")
 result_text_box.pack()
 
 # Update UI based on task selection
-task_var.trace_add("write", lambda *_: (
-    toggle_language_selection(),
-    help_text.set(
-        "Tip: For 'Answer Question', enter context (line 1) and question (line 2)."
-        if task_var.get() == "Answer Question" else
-        "Tip: Enter text and click 'Run Task'."
-    )
-))
+task_var.trace_add("write", toggle_language_selection)
 
 root.mainloop()
