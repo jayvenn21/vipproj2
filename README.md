@@ -17,14 +17,14 @@ This toolkit provides four NLP capabilities through a user-friendly GUI:
 
 DEPENDENCIES: 
 Below are the dependencies needed to install in the terminal (we have used VScode) before running the program:
-pip install transformers torch sentencepiece scikit-learn accelerate VaderSentiment
-pip install streamlit (for using the streamlit version)
+- transformers
+- torch
+- sentencepiece
+- scikit-learn
+- accelerate
+- VaderSentiment
+- gradio
 
-RUNNING IN LOCAL TERMINAL:
-python main_gui.py
-
-RUNNING STREAMLIT VERSION
-python -m streamlit run main_streamlit.py
 
 FOR EACH FEATURE:
 - Summarize (t5-base): place some text as input
@@ -32,13 +32,14 @@ FOR EACH FEATURE:
 - Answer Question (t5-base): Line 1: context (text that contains the answer), Line 2: the question
 - Classify (sentiment analysis): place some sentence or paragraph as input
 
-## JUPYTER NOTEBOOK INSTRUCTIONS
-- Run it on Cybershuttle
-- Just run each cell in order
-- Last cell is just for debugging
-- (It's still a work in progress and it doesn't work yet)
+## LOCAL TERMINAL INSTRUCTIONS (Milestone 2.1 folder)
+1. pip install all the dependencies
+2. Run python main_gui.py
+3. Alternatively you can run the gradio or streamlit versions:
+- python main_gradio.py
+- python -m streamlit run main_streamlit.py
 
-## REMOTE HPC INSTRUCTIONS:
+## REMOTE HPC INSTRUCTIONS (Milestone 2.2 folder):
 NOTE: This version is not up to date
 Differences: The program connects remotely to a HPC and runs the AI on there instead of on your local machine. 
 It will display the result on your local machine.
