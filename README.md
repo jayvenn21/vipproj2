@@ -33,10 +33,10 @@ FOR EACH FEATURE:
 - Classify (sentiment analysis): place some sentence or paragraph as input
 
 ## JUPYTER NOTEBOOK INSTRUCTIONS
-Run it on Cybershuttle
-Just run each cell in order
-Last cell is just for debugging
-(It's still a work in progress and it doesn't work yet)
+- Run it on Cybershuttle
+- Just run each cell in order
+- Last cell is just for debugging
+- (It's still a work in progress and it doesn't work yet)
 
 ## REMOTE HPC INSTRUCTIONS:
 NOTE: This version is not up to date
