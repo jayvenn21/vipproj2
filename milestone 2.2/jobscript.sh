@@ -11,16 +11,16 @@ OUTPUT_FILE=$3
 echo "Running $TASK..."
 case $TASK in
   ("Summarize")
-    srun python ~/vipproj2/milestone 2.2/hpc_summarize.py 
+    srun python ~/vipproj2/'milestone 2.2'/hpc_summarize.py 
     ;;
   ("Translate")
-    srun python ~/vipproj2/milestone 2.2/hpc_translate.py 
+    srun python ~/vipproj2/'milestone 2.2'/hpc_translate.py 
     ;;
   ("Answer Question")
-    srun python ~/vipproj2/milestone 2.2/hpc_qa.py 
+    srun python ~/vipproj2/'milestone 2.2'/hpc_qa.py 
     ;;
   ("Classify")
-    srun python ~/vipproj2/milestone 2.2/hpc_classify.py 
+    srun python ~/vipproj2'/milestone 2.2'/hpc_classify.py 
     ;;
   (*)
     echo "Unknown task: $TASK"

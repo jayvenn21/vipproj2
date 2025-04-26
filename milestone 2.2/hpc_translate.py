@@ -1,8 +1,9 @@
-from transformers import MarianMTModel, MarianTokenizer
 import secret
 
 REMOTE_INPUT_FILE = secret.REMOTE_INPUT_FILE
 REMOTE_OUTPUT_FILE = secret.REMOTE_OUTPUT_FILE
+
+from transformers import MarianMTModel, MarianTokenizer
 
 # Function to get the model name based on the source and target language
 def get_model_name(source_language, target_language):
@@ -26,6 +27,7 @@ def translate_text(input_text, source_language='en', target_language='es'):
     translation = tokenizer.decode(translated_ids[0], skip_special_tokens=True)
     
     return translation
+
 
 with open(REMOTE_INPUT_FILE, "r") as p:
     prompt = p.readlines()
