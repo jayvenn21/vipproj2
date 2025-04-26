@@ -27,10 +27,6 @@ def run_task():
                 f1.write(target_lang_var.get() + "\n")
             f1.write(input_text)
 
-        start_time = time.time()
-        process = psutil.Process()
-        start_memory = 
-
         #memt = subprocess.Popen(["python", "memorytracker.py", str(process.pid)])
         print("Timer started:")
         subprocess.run(["scp", LOCAL_INPUT_FILE, f"{HPC_USER}@{HPC_HOST}:{REMOTE_INPUT_FILE}"])
