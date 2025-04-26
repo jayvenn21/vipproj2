@@ -1,10 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import subprocess
-from hpc_summarize import summarize_text
-from hpc_translate import translate_text
-from hpc_qa import answer_question
-from hpc_classify import classify_sentiment  # Updated import to match the function name
+
 import secret
 import time
 import psutil
@@ -29,13 +26,14 @@ def run_task():
                 f1.write(source_lang_var.get() + "\n")
                 f1.write(target_lang_var.get() + "\n")
             f1.write(input_text)
-        start_time = time.time()
-        process = psutil.Process()
 
-        memt = subprocess.Popen(["python", "memorytracker.py", str(process.pid)])
+        start_time = time.time()
+        #process = psutil.Process()
+
+        #memt = subprocess.Popen(["python", "memorytracker.py", str(process.pid)])
         print("Timer started:")
         subprocess.run(["scp", LOCAL_INPUT_FILE, f"{HPC_USER}@{HPC_HOST}:{REMOTE_INPUT_FILE}"])
-
+        print("File copied")
         job_cmd = f"sbatch {HPC_JOB_SCRIPT} {task} {REMOTE_INPUT_FILE} {REMOTE_OUTPUT_FILE}"
         
         # Run the command over SSH
@@ -45,6 +43,7 @@ def run_task():
             stderr=subprocess.PIPE
         )
         stdout, stderr = ssh.communicate()
+        print("SLURM thing sent i think")
 
         if ssh.returncode != 0:
             return f"[ERROR] Job submission failed:\n{stderr.decode()}"
@@ -52,29 +51,25 @@ def run_task():
         job_output = stdout.decode()
         print("Submitted job:", job_output)
         job_id = job_output.strip().split()[-1]  # Optional: parse job ID
-
+        print("we going places")
         # Waits for the SLURM job to be done before parsing result - to prevent previous result from showing up
-        while True:
-            # Below line Could be removed, idk
-            time.sleep(1)
-            result = subprocess.run(
-                ["ssh", f"{HPC_USER}@{HPC_HOST}", f"squeue -j {job_id} | wc -l"],
-                stdout=subprocess.PIPE
-            )
-            lines = int(result.stdout.decode().strip())
-            if lines <= 1:
-                break
+        
+        result = subprocess.run(
+            ["ssh", f"{HPC_USER}@{HPC_HOST}", f"squeue -j {job_id} | wc -l"],
+            stdout=subprocess.PIPE
+        )
+        lines = int(result.stdout.decode().strip())
+        
 
         #Polling result
-        while True:
-            time.sleep(1)
-            result = subprocess.run(
-                ["ssh", f"{HPC_USER}@{HPC_HOST}", f"test -f {REMOTE_OUTPUT_FILE} && echo DONE || echo WAIT"],
-                stdout=subprocess.PIPE
-            )
-            if result.stdout.decode().strip() == "DONE":
-                subprocess.run(["scp", f"{HPC_USER}@{HPC_HOST}:{REMOTE_OUTPUT_FILE}", LOCAL_OUTPUT_FILE], check=True)
-                break
+        
+        result = subprocess.run(
+            ["ssh", f"{HPC_USER}@{HPC_HOST}", f"test -f {REMOTE_OUTPUT_FILE} && echo DONE || echo WAIT"],
+            stdout=subprocess.PIPE
+        )
+        if result.stdout.decode().strip() == "DONE":
+            subprocess.run(["scp", f"{HPC_USER}@{HPC_HOST}:{REMOTE_OUTPUT_FILE}", LOCAL_OUTPUT_FILE], check=True)
+
 
         # Download the result file
         
@@ -88,7 +83,7 @@ def run_task():
         f2.close()
         print(time.time() - start_time)
 
-        memt.terminate()
+        #memt.terminate()
         result_text_box.delete("1.0", tk.END)
         result_text_box.insert(tk.END, resulttext)
     except Exception as e:
