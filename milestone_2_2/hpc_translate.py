@@ -1,5 +1,5 @@
 import secret
-
+from benchmark_utils import benchmark
 REMOTE_INPUT_FILE = secret.REMOTE_INPUT_FILE
 REMOTE_OUTPUT_FILE = secret.REMOTE_OUTPUT_FILE
 
@@ -10,6 +10,7 @@ def get_model_name(source_language, target_language):
     return f"Helsinki-NLP/opus-mt-{source_language}-{target_language}"
 
 # Function to perform translation
+@benchmark
 def translate_text(input_text, source_language='en', target_language='es'):
     model_name = get_model_name(source_language, target_language)
     

@@ -6,6 +6,7 @@ REMOTE_OUTPUT_FILE = secret.REMOTE_OUTPUT_FILE
 from transformers import pipeline
 import numpy as np
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from benchmark_utils import benchmark
 
 # Initialize both models
 hf_classifier = pipeline(
@@ -15,6 +16,7 @@ hf_classifier = pipeline(
 )
 vader = SentimentIntensityAnalyzer()
 
+@benchmark
 def classify_sentiment(input_text):
     """
     Hybrid sentiment analysis combining transformer models with VADER intensity analysis

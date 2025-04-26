@@ -28,7 +28,8 @@ def run_task():
             f1.write(input_text)
 
         start_time = time.time()
-        #process = psutil.Process()
+        process = psutil.Process()
+        start_memory = 
 
         #memt = subprocess.Popen(["python", "memorytracker.py", str(process.pid)])
         print("Timer started:")

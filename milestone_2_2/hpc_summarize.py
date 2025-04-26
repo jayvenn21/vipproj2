@@ -1,5 +1,6 @@
 from transformers import T5ForConditionalGeneration, T5Tokenizer
 import secret
+from benchmark_utils import benchmark
 
 REMOTE_INPUT_FILE = secret.REMOTE_INPUT_FILE
 REMOTE_OUTPUT_FILE = secret.REMOTE_OUTPUT_FILE
@@ -9,6 +10,7 @@ model_name = "t5-base"
 tokenizer = T5Tokenizer.from_pretrained(model_name)
 model = T5ForConditionalGeneration.from_pretrained(model_name)
 
+@benchmark
 def summarize_text(input_text):
     # Preprocess input
     input_text = input_text.strip()
