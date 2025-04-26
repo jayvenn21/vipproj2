@@ -53,26 +53,30 @@ def run_task():
         job_id = job_output.strip().split()[-1]  # Optional: parse job ID
         print("we going places")
         # Waits for the SLURM job to be done before parsing result - to prevent previous result from showing up
-        
-        result = subprocess.run(
-            ["ssh", f"{HPC_USER}@{HPC_HOST}", f"squeue -j {job_id} | wc -l"],
-            stdout=subprocess.PIPE
-        )
-        lines = int(result.stdout.decode().strip())
-        
+        while True:
+            time.sleep(0.001)
+            result = subprocess.run(
+                ["ssh", f"{HPC_USER}@{HPC_HOST}", f"squeue -j {job_id} | wc -l"],
+                stdout=subprocess.PIPE
+            )
+            lines = int(result.stdout.decode().strip())
+            if lines <= 1:
+                break
+        print("first loop broken")
 
         #Polling result
-        
-        result = subprocess.run(
-            ["ssh", f"{HPC_USER}@{HPC_HOST}", f"test -f {REMOTE_OUTPUT_FILE} && echo DONE || echo WAIT"],
-            stdout=subprocess.PIPE
-        )
-        if result.stdout.decode().strip() == "DONE":
-            subprocess.run(["scp", f"{HPC_USER}@{HPC_HOST}:{REMOTE_OUTPUT_FILE}", LOCAL_OUTPUT_FILE], check=True)
-
+        while True:
+            time.sleep(0.001)
+            result = subprocess.run(
+                ["ssh", f"{HPC_USER}@{HPC_HOST}", f"test -f {REMOTE_OUTPUT_FILE} && echo DONE || echo WAIT"],
+                stdout=subprocess.PIPE
+            )
+            if result.stdout.decode().strip() == "DONE":
+                subprocess.run(["scp", f"{HPC_USER}@{HPC_HOST}:{REMOTE_OUTPUT_FILE}", LOCAL_OUTPUT_FILE], check=True)
+                break
 
         # Download the result file
-        
+        print("second loop broken")
 
         # Return the result
         resulttext = "test text"
