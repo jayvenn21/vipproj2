@@ -1,12 +1,13 @@
 import tkinter as tk
 from tkinter import messagebox
 import subprocess
-from summarize import summarize_text
-from translate import translate_text
-from qa import answer_question
-from classify import classify_sentiment  # Updated import to match the function name
+from hpc_summarize import summarize_text
+from hpc_translate import translate_text
+from hpc_qa import answer_question
+from hpc_classify import classify_sentiment  # Updated import to match the function name
 import secret
 import time
+import psutil
 
 # === CONFIGURATION ===
 LOCAL_INPUT_FILE = "prompt.txt"
@@ -28,7 +29,11 @@ def run_task():
                 f1.write(source_lang_var.get() + "\n")
                 f1.write(target_lang_var.get() + "\n")
             f1.write(input_text)
-        
+        start_time = time.time()
+        process = psutil.Process()
+
+        memt = subprocess.Popen(["python", "memorytracker.py", str(process.pid)])
+        print("Timer started:")
         subprocess.run(["scp", LOCAL_INPUT_FILE, f"{HPC_USER}@{HPC_HOST}:{REMOTE_INPUT_FILE}"])
 
         job_cmd = f"sbatch {HPC_JOB_SCRIPT} {task} {REMOTE_INPUT_FILE} {REMOTE_OUTPUT_FILE}"
@@ -81,7 +86,9 @@ def run_task():
 
         f1.close()
         f2.close()
-       
+        print(time.time() - start_time)
+
+        memt.terminate()
         result_text_box.delete("1.0", tk.END)
         result_text_box.insert(tk.END, resulttext)
     except Exception as e:
