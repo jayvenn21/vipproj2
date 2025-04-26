@@ -17,7 +17,8 @@ This toolkit provides four NLP capabilities through a user-friendly GUI:
 
 DEPENDENCIES: 
 Below are the dependencies needed to install in the terminal (we have used VScode) before running the program:
-pip install transformers torch sentencepiece scikit-learn accelerate
+pip install transformers torch sentencepiece scikit-learn accelerate vaderSentiment
+pip install streamlit (if you want to use the streamlit version of the app)
 
 RUNNING IN LOCAL TERMINAL:
 python main_gui.py
