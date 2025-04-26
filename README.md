@@ -24,6 +24,7 @@ Below are the dependencies needed to install in the terminal (we have used VScod
 - accelerate
 - VaderSentiment
 - gradio
+- psutil
 
 
 FOR EACH FEATURE:
