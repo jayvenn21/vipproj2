@@ -31,4 +31,4 @@ additional_dependencies:
     - scikit-learn
     - accelerate
     - VaderSentiment
-    - streamlit
+    - gradio
