@@ -21,9 +21,6 @@ workspace:
   data_collection: []
 
 additional_dependencies:
-  conda:
-    - python=3.10
-    - pip
   pip:
     - transformers
     - torch
