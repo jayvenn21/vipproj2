@@ -1,10 +1,12 @@
 from transformers import MarianMTModel, MarianTokenizer
+from benchmark_utils import benchmark
 
 # Function to get the model name based on the source and target language
 def get_model_name(source_language, target_language):
     return f"Helsinki-NLP/opus-mt-{source_language}-{target_language}"
 
 # Function to perform translation
+@benchmark
 def translate_text(input_text, source_language='en', target_language='es'):
     model_name = get_model_name(source_language, target_language)
     
