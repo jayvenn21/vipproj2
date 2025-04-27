@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -N1 -n1                         
-#SBATCH --mem-per-cpu=1G               
+#SBATCH --mem-per-cpu=4G               
 #SBATCH -t1                            
 
 
