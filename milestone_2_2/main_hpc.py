@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import subprocess
 
-import secret
+import milestone_2_2.secret as secret
 import time
 import psutil
 
@@ -82,7 +82,6 @@ def run_task():
 
         f1.close()
         f2.close()
-        print(time.time() - start_time)
 
         #memt.terminate()
         result_text_box.delete("1.0", tk.END)

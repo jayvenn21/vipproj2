@@ -23,13 +23,15 @@ def benchmark(func):
         tracemalloc.stop()
         
         # Print benchmark results
-        print("\n" + "="*50)
-        print(f"Benchmark for {func.__name__}:")
-        print(f"Execution Time: {(end_time - start_time):.4f} seconds")
-        print(f"Memory Usage - Current: {current / 10**6:.2f} MB")
-        print(f"Memory Usage - Peak: {peak / 10**6:.2f} MB")
-        print(f"CPU Usage: {process.cpu_percent()}%")
-        print("="*50 + "\n")
-        
+        file = "log.txt"
+        with open(file, "w") as f:
+            f.write("\n" + "="*50)
+            f.write(f"Benchmark for {func.__name__}:")
+            f.write(f"Execution Time: {(end_time - start_time):.4f} seconds")
+            f.write(f"Memory Usage - Current: {current / 10**6:.2f} MB")
+            f.write(f"Memory Usage - Peak: {peak / 10**6:.2f} MB")
+            f.write(f"CPU Usage: {process.cpu_percent()}%")
+            f.write("="*50 + "\n")
+        f.close()
         return result
     return wrapper
