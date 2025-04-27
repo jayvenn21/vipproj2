@@ -16,7 +16,7 @@ case $TASK in
   ("Translate")
     srun python ~/vipproj2/milestone_2_2/hpc_translate.py 
     ;;
-  ("'Answer Question'")
+  ("AnswerQuestion")
     srun python ~/vipproj2/milestone_2_2/hpc_qa.py 
     ;;
   ("Classify")

@@ -104,7 +104,7 @@ task_var = tk.StringVar(value="Summarize")
 # Dropdown for task selection
 task_label = tk.Label(root, text="Select Task:")
 task_label.pack()
-task_menu = tk.OptionMenu(root, task_var, "Summarize", "Translate", "Answer Question", "Classify")  # Removed "Generate"
+task_menu = tk.OptionMenu(root, task_var, "Summarize", "Translate", "AnswerQuestion", "Classify")  # Removed "Generate"
 task_menu.pack()
 
 # Input text box
