@@ -25,12 +25,12 @@ def benchmark(func):
         # Print benchmark results
         file = "log.txt"
         with open(file, "w") as f:
-            f.write("\n" + "="*50)
-            f.write(f"Benchmark for {func.__name__}:")
-            f.write(f"Execution Time: {(end_time - start_time):.4f} seconds")
-            f.write(f"Memory Usage - Current: {current / 10**6:.2f} MB")
-            f.write(f"Memory Usage - Peak: {peak / 10**6:.2f} MB")
-            f.write(f"CPU Usage: {process.cpu_percent()}%")
+            f.write("\n" + "="*50 + "\n")
+            f.write(f"Benchmark for {func.__name__}:\n")
+            f.write(f"Execution Time: {(end_time - start_time):.4f} seconds\n")
+            f.write(f"Memory Usage - Current: {current / 10**6:.2f} MB\n")
+            f.write(f"Memory Usage - Peak: {peak / 10**6:.2f} MB\n")
+            f.write(f"CPU Usage: {process.cpu_percent()}%\n")
             f.write("="*50 + "\n")
         f.close()
 
