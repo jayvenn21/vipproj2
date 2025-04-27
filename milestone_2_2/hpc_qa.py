@@ -1,4 +1,4 @@
-import milestone_2_2.secret as secret
+import secret
 from transformers import T5ForConditionalGeneration, T5Tokenizer
 from benchmark_utils import benchmark
 

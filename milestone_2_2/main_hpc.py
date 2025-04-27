@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import subprocess
 
-import milestone_2_2.secret as secret
+import secret
 import time
 import psutil
 

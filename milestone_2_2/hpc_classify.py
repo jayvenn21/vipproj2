@@ -1,4 +1,4 @@
-import milestone_2_2.secret as secret
+import secret
 
 REMOTE_INPUT_FILE = secret.REMOTE_INPUT_FILE
 REMOTE_OUTPUT_FILE = secret.REMOTE_OUTPUT_FILE
