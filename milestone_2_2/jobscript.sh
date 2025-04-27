@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -N1 -n1                         
-#SBATCH --mem-per-cpu=16G               
-#SBATCH -t15                             
+#SBATCH --mem-per-cpu=1G               
+#SBATCH -t1                            
 
 
 TASK=$1
