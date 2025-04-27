@@ -18,19 +18,15 @@ def classify_sentiment(input_text):
     Returns formatted string with nuanced sentiment assessment
     """
     try:
-        # Get HuggingFace predictions
         hf_results = hf_classifier(input_text, truncation=True)[0]
         pos_score = next(r['score'] for r in hf_results if r['label'] == 'POS')
         neg_score = next(r['score'] for r in hf_results if r['label'] == 'NEG')
         
-        # Get VADER intensity scores
         vader_scores = vader.polarity_scores(input_text)
         
-        # Combined weighted score (70% HF, 30% VADER)
         combined_pos = (pos_score * 0.7) + (vader_scores['pos'] * 0.3)
         combined_neg = (neg_score * 0.7) + (vader_scores['neg'] * 0.3)
         
-        # Determine final sentiment
         if combined_pos > combined_neg:
             sentiment = "POSITIVE"
             base_confidence = combined_pos
@@ -40,10 +36,8 @@ def classify_sentiment(input_text):
             base_confidence = combined_neg
             intensity = vader_scores['neg']
         
-        # Dynamic confidence adjustment based on intensity
         adjusted_confidence = min(base_confidence * (1 + intensity), 0.99)
         
-        # Strength classification with wider bands
         strength_ranges = [
             (0.9, "Extremely"),
             (0.8, "Very"),
@@ -59,7 +53,6 @@ def classify_sentiment(input_text):
             if adjusted_confidence >= threshold
         )
         
-        # Add intensity qualifiers
         modifiers = {
             "Extremely": "!",
             "Very": "!",

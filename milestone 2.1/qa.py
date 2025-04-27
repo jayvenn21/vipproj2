@@ -16,8 +16,6 @@ def answer_question(context, question):
     # Improved input formatting
     input_text = f"answer question based on context: {question} context: {context}"
     
-    # Better tokenization with attention to question-context balance
-    # Post-processing for better results
     result = qa_pipeline(question=question, context=context)
     
     return result['answer'] if result else "I couldn't find an answer."

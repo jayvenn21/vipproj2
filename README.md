@@ -71,3 +71,4 @@ More of a note to self, but if you want to remove all your report logs, use "rm 
 
 KNOWN ISSUES:
 "Answer Question" response not displaying properly when using the HPC version of the program
+T5-base is not a good model, therefore making us not use it in our project entirely

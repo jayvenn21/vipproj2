@@ -47,7 +47,7 @@ def run_task():
 
         job_output = stdout.decode()
         print("Submitted job:", job_output)
-        job_id = job_output.strip().split()[-1]  # Optional: parse job ID
+        job_id = job_output.strip().split()[-1]
         print("we going places")
         # Waits for the SLURM job to be done before parsing result - to prevent previous result from showing up
         while True:

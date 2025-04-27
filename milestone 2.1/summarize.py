@@ -27,10 +27,10 @@ def summarize_text(input_text):
     # Generate with adjusted parameters
     summary_ids = model.generate(
         input_ids,
-        max_length=100,       # Reduced from 150
-        min_length=30,        # Reduced from 50
-        length_penalty=3.0,   # Increased to favor shorter summaries
-        num_beams=6,          # Increased from 4
+        max_length=100,
+        min_length=30,
+        length_penalty=3.0,
+        num_beams=6,
         early_stopping=True,
         no_repeat_ngram_size=3  # Prevents word repetition
     )
