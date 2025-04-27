@@ -33,5 +33,13 @@ def benchmark(func):
             f.write(f"CPU Usage: {process.cpu_percent()}%")
             f.write("="*50 + "\n")
         f.close()
+
+        print("\n" + "="*50)
+        print(f"Benchmark for {func.__name__}:")
+        print(f"Execution Time: {(end_time - start_time):.4f} seconds")
+        print(f"Memory Usage - Current: {current / 10**6:.2f} MB")
+        print(f"Memory Usage - Peak: {peak / 10**6:.2f} MB")
+        print(f"CPU Usage: {process.cpu_percent()}%")
+        print("="*50 + "\n")
         return result
     return wrapper
