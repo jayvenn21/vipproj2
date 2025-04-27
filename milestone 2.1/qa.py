@@ -1,9 +1,7 @@
-from transformers import T5ForConditionalGeneration, T5Tokenizer
+from transformers import pipeline
 from benchmark_utils import benchmark
 
-model_name = "t5-base"
-tokenizer = T5Tokenizer.from_pretrained(model_name, legacy=False)
-model = T5ForConditionalGeneration.from_pretrained(model_name)
+qa_pipeline = pipeline("question-answering", model="deepset/roberta-base-squad2")
 
 @benchmark
 def answer_question(context, question):
@@ -19,36 +17,7 @@ def answer_question(context, question):
     input_text = f"answer question based on context: {question} context: {context}"
     
     # Better tokenization with attention to question-context balance
-    input_ids = tokenizer.encode(
-        input_text,
-        return_tensors="pt",
-        max_length=512,
-        truncation=True,
-        padding="max_length"  # Helps with consistency
-    )
-    
-    # Optimized generation parameters
-    answer_ids = model.generate(
-        input_ids,
-        max_length=100,        # More concise answers
-        min_length=5,          # Avoid empty answers
-        num_beams=5,           # Better quality than 4 beams
-        early_stopping=True,
-        repetition_penalty=2.5, # Reduce repeated phrases
-        length_penalty=1.5,     # Prefer shorter answers
-        no_repeat_ngram_size=3, # Prevent word repetition
-        temperature=0.7         # Adds slight creativity
-    )
-    
-    # Improved decoding
-    answer = tokenizer.decode(
-        answer_ids[0],
-        skip_special_tokens=True,
-        clean_up_tokenization_spaces=True
-    )
-    
     # Post-processing for better results
-    answer = answer.split(".")[0]  # Take the first complete thought
-    answer = answer.strip()
+    result = qa_pipeline(question=question, context=context)
     
-    return answer if answer else "I couldn't find an answer in the context."
+    return result['answer'] if result else "I couldn't find an answer."

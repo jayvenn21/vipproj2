@@ -1,9 +1,9 @@
-from transformers import T5ForConditionalGeneration, T5Tokenizer
+from transformers import BartForConditionalGeneration, BartTokenizer
 from benchmark_utils import benchmark
 
 model_name = "t5-base"
-tokenizer = T5Tokenizer.from_pretrained(model_name, legacy=False)
-model = T5ForConditionalGeneration.from_pretrained(model_name)
+tokenizer = BartTokenizer.from_pretrained("facebook/bart-large-cnn")
+model = BartForConditionalGeneration.from_pretrained("facebook/bart-large-cnn")
 
 @benchmark
 def summarize_text(input_text):
