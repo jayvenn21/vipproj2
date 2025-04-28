@@ -1,5 +1,5 @@
 project:
-  name: "T5-Base model"
+  name: "AI NLP Tool"
   description: "AI Model Deployment Toolkit that provides four NLP capabilities through a user-friendly GUI"
   homepage: https://github.com/jayvenn21/vipproj2.git
   authors:
